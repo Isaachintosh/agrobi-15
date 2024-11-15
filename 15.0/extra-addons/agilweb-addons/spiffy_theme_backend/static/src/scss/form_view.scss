@@ -1,0 +1,392 @@
+body.o_web_client {
+    .bootstrap-datetimepicker-widget {
+        table {
+            & thead tr:first-child th {
+                background-color: var(--biz-theme-primary-color) !important;
+                &:hover {
+                    background-color: rgba(0, 169, 228, 0.79) !important;
+                }
+            }
+
+            & td {
+                &.active,
+                &.active:hover {
+                    background-color: var(--biz-theme-primary-color) !important;
+                }
+            }
+        }
+    }
+
+    .o_form_view {
+        background-color: unset !important;
+
+        .o_form_sheet_bg {
+            background: var(--biz-theme-body-color) !important;
+            border-bottom: 0 !important;
+
+            .o_form_statusbar {
+                padding-left: 10px;
+                padding-right: 10px;
+                background-color: var(--biz-theme-secondary-color) !important;
+                color: var(--biz-theme-secondary-text-color) !important;
+                box-shadow: var(--box-shadow-common) !important;
+                border: 0;
+                border-radius: var(--border-radius-lg);
+
+                @include media-breakpoint-down(sm){
+                    padding-left: 5px;
+                    padding-right: 5px;
+                }
+
+                .o_statusbar_buttons {
+                    .btn {
+                        min-height: 30px !important;
+                    }
+                }
+                .o_statusbar_status {
+                    > .btn{
+                        font-weight: 500;
+                        border-radius: 0 !important;
+                        padding: 0 16px;
+                        @include media-breakpoint-down(sm) {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                        }
+
+                        &:last-child {
+                            border-top-left-radius: var(--border-radius-md) !important;
+                            border-bottom-left-radius: var(--border-radius-md) !important;
+                        }
+                        &:first-child {
+                            border-top-right-radius: var(--border-radius-md) !important;
+                            border-bottom-right-radius: var(--border-radius-md) !important;
+                        }
+                        &::before,  &::after {
+                            content: unset !important;
+                        }
+                    }
+
+                    > .btn-secondary {
+                        border: 1px solid var(--biz-theme-primary-color) !important;
+                        border-radius: 0 !important;
+                    }
+                }
+
+            }
+
+            .o_form_sheet {
+                background-color: var(--biz-theme-secondary-color) !important;
+                color: var(--biz-theme-body-text-color) !important;
+                box-shadow: var(--box-shadow-common) !important;
+                border: 0;
+                border-radius: var(--border-radius-lg);
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+
+                .o_group {
+                    .o_form_label:not(.o_required_modifier) {
+                        color: var(--biz-theme-body-text-color) !important;
+                        &.o_tax_total_label {
+                            line-height: 33px;
+                        }
+                    }
+                }
+
+                .o_not_full {
+                    .btn {
+                        border: 0 !important;
+                        border-left: 1px solid #efefef !important;
+                        border-radius: 0 !important;
+                    }
+
+                    &.oe_button_box {
+                        // margin-bottom: 15px !important;
+                        box-shadow: inset 0 -1px 0 #efefef;
+                        border-top-right-radius: var(--border-radius-lg);
+                    }
+                }
+
+                .oe_title {
+                    color: var(--biz-theme-primary-color) !important;
+                    width: unset;
+
+                    h1 {
+                        font-size: 20px !important;
+                    }
+                }
+
+                .o_form_uri {
+                    color: var(--biz-theme-primary-color) !important;
+
+                    &>span:first-child {
+                        color: var(--biz-theme-primary-color) !important;
+                    }
+
+                    &:focus-visible {
+                        outline: 0 !important;
+                    }
+                }
+
+                .o_list_view {
+                    .o_list_table {
+                        tbody td.o_data_cell {
+                            height: 4rem !important;
+                        }
+
+                        input, textarea {
+                            border: 1px solid #e4e6ef !important;
+                        }
+
+                        textarea {
+                            height: 40px !important;
+                            line-height: 40px;
+                        }
+                        .o_list_record_remove {
+                            vertical-align: middle;
+                        }
+                    }
+                }
+
+            }
+            .note-editable {
+                background: inherit;
+            }
+        }
+
+        .o_FormRenderer_chatterContainer {
+            background-color: var(--biz-theme-body-color) !important;
+            color: var(--biz-theme-body-text-color) !important;
+            padding: 0;
+
+            .o_ChatterTopbar_rightSection {
+                .o_ChatterTopbar_button {
+                    margin-bottom: 0 !important;
+
+                    &:hover {
+                        background-color: unset !important;
+                    }
+                }
+            }
+
+            .o_Chatter_scrollPanel {
+                .o_ActivityBox {
+                    .o_ActivityBox_titleLine {
+                        border-color: #efefef !important;
+                    }
+
+                    .btn:focus {
+                        box-shadow: unset !important;
+                    }
+
+                    .o_ActivityBox_titleBadge {
+                        padding: 5px 7px 5px 7px !important;
+                    }
+
+                    &.o_ChatterTopbar_actions {
+                        border-color: transparent !important;
+                    }
+                }
+
+            }
+
+            .o_Chatter {
+                background-color: var(--biz-theme-secondary-color) !important;
+                color: var(--biz-theme-secondary-text-color);
+                border-radius: var(--border-radius-lg);
+                box-shadow: var(--box-shadow-common) !important;
+            }
+
+            .o_ComposerTextInput textarea {
+                background-color: transparent !important;
+                color: #989898 !important;
+            }
+
+            .o_Chatter_composer.o-bordered {
+                border-left-color: transparent !important;
+                border-right-color: transparent !important;
+                background-color: transparent !important;
+                border-bottom-color: #efefef !important;
+            }
+
+            .o_Composer_toolButton {
+                background-color: transparent !important;
+
+                &:hover {
+                    color: var(--biz-theme-primary-color) !important;
+                }
+            }
+
+            .o_Chatter_thread {
+                .o_MessageList_separatorLabel {
+                    background-color: transparent !important;
+                }
+            }
+
+            .o_Composer_coreMain:not(.o-composer-is-compact):not(.o-composer-is-extended) {
+                border-radius: 8px !important;
+                border-color: #efefef;
+            }
+
+            .o_Message.o-not-discussion,
+            .o_MessageList_separatorLine {
+                background-color: transparent !important;
+                border-color: #efefef !important;
+            }
+
+            .o_MessageList,
+            .o_ThreadView {
+                background-color: transparent !important;
+            }
+
+            .o-has-active-button {
+                border-color: #efefef !important;
+            }
+        }
+        .o_attachment .o_attachment_delete:hover {
+            background: var(--biz-theme-primary-color) !important;
+        }
+    }
+
+    .o_form_view {
+        .o_input {
+            padding: 0px 4px 0px 4px !important;
+            &textarea {
+                height: auto !important;
+                min-height: var(--input-height);
+            }
+        }
+
+        .o_field_widget {
+            @include media-breakpoint-down(sm) {
+                word-break: break-all;
+            }
+            .o_external_button {
+                background-color: transparent !important;
+                margin: 0 !important;
+                padding: 5px;
+            }
+
+            .o_input_dropdown .o_dropdown_button {
+                top: 50% !important;
+                transform: translateY(-50%);
+            }
+        }
+
+        .o_required_modifier.oinput {
+            background-color: var(--biz-theme-secondary-color) !important;
+        }
+
+        .o_td_label {
+
+            border-right: 0px !important;
+
+            .o_form_label {
+                font-weight: normal !important;
+
+            }
+        }
+
+        .o_form_image_controls {
+            background-color: var(--biz-theme-primary-color) !important;
+        }
+
+        .o_horizontal_separator {
+            color: var(--biz-theme-primary-color) !important;
+        }
+
+        .o_field_x2many_list_row_add {
+            a {
+                color: var(--biz-theme-primary-color) !important;
+            }
+        }
+
+        .btn.oe_stat_button {
+            border-radius: 0 !important;
+            margin: 0;
+            opacity: 1 !important;
+
+            &:hover {
+                opacity: 0.9 !important;
+            }
+
+            .o_button_icon {
+                color: var(--biz-theme-primary-color);
+            }
+
+            .o_stat_value {
+                color: unset !important;
+            }
+        }
+
+        .note-editable.panel-body {
+            background-color: var(--biz-theme-secondary-color) !important;
+        }
+    }
+
+    .o_act_window {
+        .note-toolbar.panel-heading {
+            .btn-secondary {
+                background-color: unset !important;
+                border: 0 !important;
+            }
+        }
+    }
+
+    .modal {
+        .modal-dialog {
+            .o_form_view {
+                padding: 20px 0 !important;
+
+                .o_form_sheet_bg {
+                    >.o_form_sheet {
+                        box-shadow: unset !important;
+                        padding-bottom: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+body.o_web_client.dark_mode {
+    .o_form_view {
+        .o_Activity_summary{
+            color: var(--biz-theme-body-text-color) !important;
+        }
+
+        .o_FormRenderer_chatterContainer div,
+        .o_form_uri {
+            &>span {
+                color: #999999 !important;
+            }
+
+            &>span:first-child {
+                color: var(--biz-theme-primary-color) !important;
+            }
+        }
+
+        .o_list_view .table-responsive .o_list_table tbody tr.o_data_row {
+            background: #1d1d1d !important;
+        }
+
+        .o_form_sheet_bg {
+            .o_form_sheet {
+                .o_not_full .btn {
+                    border-left: 1px solid #414141 !important;
+                }
+            }
+        }
+
+        .oe_button_box {
+            .btn {
+                color: #dddddd !important;
+            }
+            box-shadow: inset 0 -1px 0 #414141 !important;
+        }
+
+        .o_list_table .o_data_row.o_selected_row>.o_data_cell:not(.o_readonly_modifier):not(.o_invisible_modifier):not(.o_handle_cell) {
+            background-color: transparent !important;
+        }
+    }
+}

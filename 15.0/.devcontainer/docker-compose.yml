@@ -1,0 +1,57 @@
+version: '3.4'
+
+networks:
+  net:
+
+volumes:
+  db-postgresql:
+  db-pgadmin4:
+  filestore:
+
+services:
+  app:
+    build: 
+      context: ../
+      dockerfile: Dockerfile
+    volumes:
+      - filestore:/var/lib/odoo
+      - ../.devcontainer:/opt/.devcontainer
+      - ../.vscode:/opt/.vscode
+      - ../extra-addons:/opt/extra-addons
+      - ../odoo:/opt/odoo
+      - ../odoo-dev.conf:/opt/odoo-dev.conf
+    networks:
+      - net
+    depends_on:
+      - db-agilweb
+    ports:
+      - 8069:8069
+      - 8072:8072
+    tty: true
+    command: ["/bin/bash"]
+
+  db-agilweb:
+    user: root
+    image: postgres:15
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+      POSTGRES_DB: postgres
+    volumes:
+      - db-postgresql:/var/lib/postgresql/data
+    networks:
+      - net
+  pgadmin-odoo-16:
+    user: root
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@odoocast.com.br
+      PGADMIN_DEFAULT_PASSWORD: odoocast@2023
+    ports:
+      - "8080:80"
+    networks:
+      - net
+    volumes:
+      - db-pgadmin4:/var/lib/pgadmin4/data
+    depends_on:
+      - db-agilweb

@@ -1,0 +1,14 @@
+<distDFeInt xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.01">
+    <tpAmb>{{ ambiente }}</tpAmb>
+    <cUFAutor>{{ estado }}</cUFAutor>
+    <CNPJ>{{ cnpj_cpf }}</CNPJ>
+    <distNSU>
+        <ultNSU>{{ ultimo_nsu }}</ultNSU>
+    </distNSU>
+    <consChNFe>
+        <chNFe>{{ chave_nfe }}</chNFe>
+    </consChNFe>
+    <consNSU>
+        <NSU>{{ nsu }}</NSU>
+    </consNSU>
+</distDFeInt>

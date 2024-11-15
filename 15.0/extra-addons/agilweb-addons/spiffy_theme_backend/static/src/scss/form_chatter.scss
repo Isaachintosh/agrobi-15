@@ -1,0 +1,78 @@
+@mixin form-chatter-designs{
+    &.chatter_right {
+        .o_action_manager {
+            .o_view_controller:not(.tree-form-viewer) {
+
+                > .o_content > .o_form_view {
+                    display: flex;
+                    height: 100%;
+    
+                    .o_form_sheet_bg {
+                        width: 1022px;
+                        overflow: auto;
+                        flex: 1 1 auto;
+                    }
+    
+                    .o_FormRenderer_chatterContainer {
+                        min-height: 100%;
+                        // width: 530px;
+                        // margin-left: 15px;
+                        margin: 0;
+                        padding-bottom: 1rem;
+                        flex-basis: 38%;
+                        padding-left: 1rem;
+    
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
+    
+                        .o_Chatter {
+                            height: 100%;
+                        }
+    
+                        .o_Chatter_scrollPanel {
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    // check this in repsonsive
+    &.chatter_bottom {
+        .o_form_view {
+            .o_FormRenderer_chatterContainer {
+                border: 0;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
+body.o_web_client {
+    .o_Message{
+        background-color: transparent;
+    }
+    .o_Attachment{
+        &.o-has-card-details{
+            color: #121212;
+        }
+    }
+    &.top_menu_vertical{
+        @media (min-width: 1470px) {
+            @include form-chatter-designs;
+        }
+    }
+    
+    &.top_menu_horizontal{
+        @include media-breakpoint-up(xl) {
+            @include form-chatter-designs;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="biz_responsive_web_layout_template" inherit_id="web.layout" name="Bizople Responsive Web Layout">
+        <xpath expr="//meta[last()]" position="after">
+            <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+            <link rel="stylesheet" type="text/css" href="/spiffy_theme_backend/static/lib/RemixIcon/remixicon.css" />
+        </xpath>
+    </template>
+</odoo>

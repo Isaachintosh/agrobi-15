@@ -1,0 +1,93 @@
+<templates id="template" xml:space="preserve">
+	<t t-extend="ListView.buttons" t-name="show_icon_pack.button">
+		<t t-jquery="div.o_list_buttons" t-operation="append">
+			<a class="btn btn-primary open_wizard_action" href="https://www.bizople.com/remix-icons" target="_blank">
+				Show Icon Pack
+			</a>
+		</t>
+	</t>
+
+	<t t-name="spiffy_theme_backend.UserMenuInherit" t-inherit="web.UserMenu" t-inherit-mode="extension" owl="1">
+		<xpath expr="//Dropdown[hasclass('o_user_menu')]" position="replace">
+			<div class="o_user_menu">
+				<Dropdown class="user-image-style" t-on-dropdown-item-selected.stop="onDropdownItemSelected">
+					<t t-set-slot="toggler">
+						<img class="rounded-circle o_user_avatar oe_topbar_avatar" t-att-src="source" alt="User"/>
+						<div class="user-info">
+							<span class="oe_topbar_name"><t t-esc="user.name"/><t t-if="env.debug" t-esc="' (' + user.db.name + ')'"/></span>
+							<span class="greeting">
+								<t t-if="greeting">
+									<t t-esc="greeting"/>
+								</t>
+							</span>
+						</div>
+					</t>
+					<t t-foreach="getElements()" t-as="element" t-key="element_index">
+						<t t-if="!element.hide">
+							<UserMenuItem
+								t-if="element.type == 'item'"
+								payload="{ callback: element.callback, id: element.id }"
+								href="element.href"
+								t-esc="element.description"
+							/>
+							<div t-if="element.type == 'separator'" role="separator" class="dropdown-divider"/>
+						</t>
+					</t>
+				</Dropdown>
+			</div>
+		</xpath>
+	</t>
+
+	<t t-inherit="web.SwitchCompanyMenu" t-inherit-mode="extension" owl="1">
+		<xpath expr="//Dropdown[hasclass('o_switch_company_menu')]" position="replace">
+			<div class="o_switch_company_menu">
+				<div class="o_user_lang position-relative">
+					<a role="button" class="dropdown-toggle lang_selector" data-toggle="dropdown" data-display="static" aria-expanded="false" title="Languages">
+						<i class="ri ri-translate-2" role="img" aria-label="Activities" />
+					</a>
+					<div class="dropdown-menu" role="menu">
+						<div class="align-items-center active_lang">
+						</div>
+					</div>
+				</div>
+				<div class="company_selections d-inline-block position-relative">
+					<a role="button" class="dropdown-toggle o-no-caret" data-toggle="dropdown" data-display="static" aria-expanded="false" href="#" title="Company">
+						<span t-attf-class="{{env.isSmall ? 'ri ri-building-2-line' : 'oe_topbar_name'}}">
+							<t t-if="!env.isSmall"><i class="ri ri-building-2-line" /></t>
+						</span>
+					</a>
+					<div class="dropdown-menu" role="menu">
+						<t t-foreach="Object.values(companyService.availableCompanies).sort((c1, c2) => c1.sequence - c2.sequence)" t-as="company">
+							<t t-call="web.SwitchCompanyItem">
+								<t t-set="company" t-value="company" />
+							</t>
+						</t>
+					</div>
+				</div>
+				<div class="debug_activator">
+					<a t-attf-class="activate_debug {{isDebug ? 'toggle' : ''}}" title="Debug">
+						<span class="ri ri-code-box-line" style="font-size: 18px;"/>
+					</a>
+				</div>
+				<div class="theme_selector list-unstyled ml-3">
+					<a class="theme-edit" title="Theme Setting">
+						<span aria-label="Themes Configuration" class="ri ri-paint-brush-line" />
+					</a>
+				</div>
+				<div class="vertical_sidemenu_behaviour d-none ml-3">
+					<a class="pin_sidebar" title="Pin Sidebar">
+						<span class="ri ri-lock-unlock-line" style="font-size: 18px;"/>
+					</a>
+				</div>
+				<div class="dark_mode list-unstyled ml-3">
+					<div class="dark-light-mode-button-design">
+						<input id="dark_mod" type="checkbox" class="checkbox custom-control-input" role="switch" />
+						<label for="dark_mod" class="label mb-0" title="Light/Dark Mode">
+							<i class='bulb-on ri ri-lightbulb-flash-fill'></i>
+						</label>
+					</div>
+				</div>
+			</div>
+		</xpath>
+	</t>
+</templates>

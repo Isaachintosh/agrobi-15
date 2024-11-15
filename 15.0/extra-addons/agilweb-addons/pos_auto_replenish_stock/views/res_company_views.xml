@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- View res.company form -->
+    <record id="view_res_company_form_inherit" model="ir.ui.view">
+        <field name="name">view.res.company.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="automate_parameters_page" string="Automação">
+                    <group name="parameters" string="Parâmetros">
+                        <group>
+                            <field name="create_purchase_order_id" />
+                        </group>
+                        <group>
+                            <field name="confirm_picking_id" />
+                        </group>
+                        <group>
+                            <field name="auto_create_invoice" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_company_form_inherit_from_ele" model="ir.ui.view">
+        <field name="name">res.company.view.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="l10n_br_eletronic_document.view_br_nfse_floripa_res_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='nfce']" position="before">
+                <group name="sequenciator" string="Sequenciador">
+                    <field name="l10n_br_nfe_sequence" />
+                    <field name="l10n_br_nfe_service_sequence" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

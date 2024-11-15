@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="web_login_layout_inherit" name="Web Login Layout Inherit" inherit_id="web.login_layout">
+        <xpath expr="//t[@t-set='html_data']" position="before">
+            <t t-set="company" t-value="request.env.company"></t>
+            <t t-set="backend_theme_data" t-value="company.get_login_page_data()"/>
+            <t t-if="company.show_bg_image">
+                <div class="login-page-background" t-attf-style="background-color: #{company.login_page_background_color}; background-image: url(/web/image/res.company/#{company.id}/login_page_background_img);"></div>
+            </t>
+            <t t-else="">
+                <div class="login-page-background" t-attf-style="background-color: #{company.login_page_background_color};"></div>
+            </t>
+        </xpath>
+       
+        <xpath expr="//t[@t-set='body_classname']" position="attributes">
+            <attribute name="t-value">'bg-100 backend-login-page background-image'</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('card-body')]" position="attributes">
+            <attribute name="t-attf-class">card-body #{company.login_page_style} #{backend_theme_data['config_vals'].color_pallet if not backend_theme_data['config_vals'].use_custom_colors else ''}</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('card-body')]//div[contains(@t-attf-class, 'text-center pb-3 border-bottom')]" position="replace">
+            <div t-attf-class="text-center pb-3 border-bottom {{'mb-3' if form_small else 'mb-2'}}">
+                <img class="img img-fluid w-50 mx-auto" t-attf-src="/web/image/res.company/#{company.id}/logo" alt="Logo"/>
+            </div>
+        </xpath>
+
+        <xpath expr="//t[@t-if='not disable_database_manager']//a" position="attributes">
+            <attribute name="t-attf-style">color: #{company.login_page_text_color if company.login_page_style == 'login_style_1' or company.login_page_style == 'login_style_3' or company.login_page_style == 'login_style_4' else ''};</attribute>
+        </xpath>
+
+        <xpath expr="//div[@t-if='not disable_footer']/a" position="attributes">
+            <attribute name="t-attf-style">color: #{company.login_page_text_color if company.login_page_style == 'login_style_1' or company.login_page_style == 'login_style_3' or company.login_page_style == 'login_style_4' else ''};</attribute>
+        </xpath>
+    </template>
+
+    <template id="web_login_inherit" name="Web Login Inherit" inherit_id="web.login">
+        <xpath expr="//form[hasclass('oe_login_form')]" position="before">
+            <t t-set="company" t-value="request.env.company"></t>
+            <t t-set="backend_theme_data" t-value="company.get_login_page_data()"/>
+        </xpath>
+        <xpath expr="//span[hasclass('input-group-append')]//a" position="attributes">
+            <attribute name="t-attf-style">border-color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''};background-color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''}; color: #{backend_theme_data['config_vals'].light_primary_text_color if backend_theme_data['config_vals'].use_custom_colors else ''};</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('field-login')]" position="replace">
+            <div class="form-group field-login">
+                <label for="login">Email</label>
+                <div class="d-flex align-items-center  input_content">
+                    <i class="ml-2 fa fa-envelope fa-lg" t-attf-style="color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''};"/>
+                    <input type="text" placeholder="Email" name="login" t-att-value="login" id="login" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-password')]" position="replace">
+            <div class="form-group field-password">
+                <label for="password">Password</label>
+                <div class="d-flex align-items-center  input_content">
+                    <i class="ml-2 fa fa-lock fa-lg" t-attf-style="color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''};"></i>
+                    <input type="password" placeholder="Password" name="password" id="password" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autocomplete="current-password" t-att-autofocus="'autofocus' if login else None" maxlength="4096"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[contains(@t-attf-class, 'oe_login_buttons')]" position="attributes">
+            <attribute name="t-attf-style">color: #{company.login_page_text_color if company.login_page_style == 'login_style_3' or company.login_page_style == 'login_style_4' else ''};</attribute>
+        </xpath>
+        <xpath expr="//div[contains(@t-attf-class, 'oe_login_buttons')]//button[hasclass('btn-primary')]" position="attributes">
+            <attribute name="t-attf-style">background-color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''}; color: #{backend_theme_data['config_vals'].light_primary_text_color if backend_theme_data['config_vals'].use_custom_colors else ''};</attribute>
+
+            <attribute name="class" separator=" " add="border-0"/>
+        </xpath>
+
+        <xpath expr="//t[@t-if='debug']//button[hasclass('btn-link')]" position="attributes">
+            <attribute name="t-attf-style">color: #{company.login_page_text_color if company.login_page_style == 'login_style_3' or company.login_page_style == 'login_style_4' else ''};</attribute>
+        </xpath>
+    </template>
+
+    <template id="auth_signup_btn_inherit" name="Auth Signup Buttons Inherit" inherit_id="auth_signup.signup">
+        <xpath expr="//form[hasclass('oe_signup_form')]" position="before">
+            <t t-set="company" t-value="request.env.company"></t>
+            <t t-set="backend_theme_data" t-value="company.get_login_page_data()"/>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_login_buttons')]//button[hasclass('btn-primary')]" position="attributes">
+            <attribute name="t-attf-style">background-color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''}; color: #{backend_theme_data['config_vals'].light_primary_text_color if backend_theme_data['config_vals'].use_custom_colors else ''};</attribute>
+            <attribute name="class" separator=" " add="border-0"/>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_login_buttons')]//a[hasclass('btn-link')]" position="attributes">
+            <attribute name="t-attf-style">color: #{company.login_page_text_color if company.login_page_style == 'login_style_3' or company.login_page_style == 'login_style_4' else ''};</attribute>
+        </xpath>
+    </template>
+
+    <template id="web_signup_inherit" name="Web Signup Inherit" inherit_id="auth_signup.fields">
+        <xpath expr="//div[hasclass('field-login')]" position="replace">
+            <t t-set="company" t-value="request.env.company"></t>
+            <t t-set="backend_theme_data" t-value="company.get_login_page_data()"/>
+            <div class="form-group field-login">
+                <label for="login">Your Email</label>
+                <div class="d-flex align-items-center  input_content">
+                    <i class="ml-2 fa fa-envelope fa-lg" t-attf-style="color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''};"></i>
+                    <input type="text" placeholder="Email" name="login" t-att-value="login" id="login" class="form-control form-control-sm" autofocus="autofocus"
+                    autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+                </div>
+                
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-name')]" position="replace">
+            <div class="form-group field-name">
+                <label for="name">Your Name</label>
+                <div class="d-flex align-items-center  input_content">
+                    <i class="ml-2 fa fa-user fa-lg" t-attf-style="color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''};"></i>
+                    <input type="text" name="name" t-att-value="name" id="name" class="form-control form-control-sm" placeholder="Name"
+                    required="required" t-att-readonly="'readonly' if only_passwords else None"
+                    t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+                </div>
+                
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-password')]" position="replace">
+            <div class="form-group field-password pt-2">
+                <label for="password">Password</label>
+                <div class="d-flex align-items-center  input_content">
+                    <i class="ml-2 fa fa-lock fa-lg" t-attf-style="color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''};"></i>
+                    <input type="password" placeholder="Password" name="password" id="password" class="form-control form-control-sm"
+                    required="required" t-att-autofocus="'autofocus' if only_passwords else None"/>
+                </div>
+                
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-confirm_password')]" position="replace">
+            <div class="form-group field-confirm_password">
+                <label for="confirm_password">Confirm Password</label>
+                <div class="d-flex align-items-center  input_content">
+                    <i class="ml-2 fa fa-unlock-alt fa-lg" t-attf-style="color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''};"></i>
+                    <input type="password" placeholder="Confirm Password" name="confirm_password" id="confirm_password" class="form-control form-control-sm" required="required"/>
+                </div>
+                
+            </div>
+        </xpath>
+    </template>
+    <template id="web_reset_inherit" name="Web Reset Inherit" inherit_id="auth_signup.reset_password">
+        <xpath expr="//div[hasclass('field-login')]" position="replace">
+            <t t-set="company" t-value="request.env.company"></t>
+            <t t-set="backend_theme_data" t-value="company.get_login_page_data()"/>
+            <div class="form-group field-login">
+                <label for="login" class="col-form-label">Your Email</label>
+                <div class="d-flex align-items-center  input_content">
+                    <i class="ml-2 fa fa-envelope fa-lg" t-attf-style="color: #{backend_theme_data['config_vals'].light_primary_bg_color if backend_theme_data['config_vals'].use_custom_colors else ''};"></i>
+                    <input type="text" placeholder="Email" name="login" t-att-value="login" id="login" class="form-control"
+                    autofocus="autofocus" required="required" autocapitalize="off"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

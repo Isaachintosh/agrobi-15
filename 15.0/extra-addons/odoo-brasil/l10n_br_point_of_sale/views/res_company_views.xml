@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <odoo>
+      
+    <!-- View res.company tree -->
+    <record id="view_res_company_tree" model="ir.ui.view">
+        <field name="name">view.res.company.tree</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="l10n_br_eletronic_document.view_br_nfse_floripa_res_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='nfe_nfce']/group" position="before">
+              <group string="Parâmetros de Emissão">
+                <label for="pos_nfce_sync_emission"/>
+                <field name="pos_nfce_sync_emission" nolabel="1"/>
+              </group>
+              <group string="Posições Fiscais">
+                <label for="default_nfce_fiscal_position_id"/>
+                <field name="default_nfce_fiscal_position_id" nolabel="1"/>
+              </group>
+            </xpath>
+        </field>
+    </record>
+
+  </odoo>

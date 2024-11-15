@@ -1,0 +1,21 @@
+<PedidoConsultaNFePeriodo xmlns="http://www.prefeitura.sp.gov.br/nfe">
+    <Cabecalho Versao="1" xmlns="">
+        <CPFCNPJRemetente><CNPJ>{{ consulta.cnpj_remetente }}</CNPJ></CPFCNPJRemetente>
+        {% if consulta.cnpj_cpf -%}
+        <CPFCNPJ>
+            {% if consulta.cnpj_cpf|length == 14 -%}
+            <CNPJ>{{ consulta.cnpj_cpf }}</CNPJ>
+            {% endif %}
+            {% if consulta.cnpj_cpf|length == 11 -%}
+            <CPF>{{ consulta.cnpj_cpf }}</CPF>
+            {% endif %}
+        </CPFCNPJ>
+        {% endif %}
+        {% if consulta.inscricao_municipal -%}
+        <Inscricao>{{ consulta.inscricao_municipal }}</Inscricao>
+        {% endif %}
+        <dtInicio>{{ consulta.data_inicio }}</dtInicio>
+        <dtFim>{{ consulta.data_fim }}</dtFim>
+        <NumeroPagina>{{ consulta.numero_pagina }}</NumeroPagina>
+	</Cabecalho>
+</PedidoConsultaNFePeriodo>

@@ -1,0 +1,73 @@
+<odoo>
+  
+    <record id="br_account_position_form" model="ir.ui.view">
+        <field name="name">br_account.fiscal.position.form</field>
+        <field name="model">account.fiscal.position</field>
+        <field name="inherit_id" ref="account.view_account_position_form"/>
+        <field name="arch" type="xml">
+            <field name="auto_apply" position="after">
+                <field name="fiscal_type"></field>
+            </field>
+            <group position="after">
+                <group name="nfe" string="Informações NF-e">
+                    <group>
+                        <field name="serie_nota_fiscal" />
+                        <field name="finalidade_emissao" />
+                        <field name="ind_final" />
+                    </group>
+                    <group>
+                        <field name="ind_pres" />
+                        <field name="edoc_policy" />
+                        <field name="nfse_consumidor" groups="base.group_no_one"/>
+                    </group>
+                </group>
+            </group>
+
+            <xpath expr="//page[@name='account_mapping']/group" position="before">
+                <group>
+                    <field name="journal_id" placeholder="Este diário vai ser usado no faturamento" />
+                    <field name="account_id" placeholder="Esta conta vai ser usada para faturamento" />
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='account_mapping']" position="after">
+                <page name="notes" string="Observações Fiscais">
+                    <group string="Observações">
+<!--                         <field name="fiscal_observation_ids" nolabel="1" />-->
+                    </group>
+                </page>
+            </xpath>
+            <field name="vat_required" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="zip_from" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="zip_to" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <xpath expr="//group/group/div" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//group/group/label" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <page name="tax_mapping" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </page>
+            <page name="tax_mapping" position="before">
+                <page name="impostos_simples" string="Impostos - Cadastro Simplicado">
+                    <p>Escolha os impostos que serão aplicados a todos os itens da fatura. <br />
+                    Em caso de empresa do simples pode ser configurado o CSOSN e a alíquota de crédito quando aplicável <br />
+                    Escolha a CFOP para emissão de nota fiscal.<br />
+                    *O primeiro dígito será trocado conforme a operação (estadual ou interna)
+                    </p>
+                    <group>
+                        <field name="csosn_icms" />
+                        <field name="icms_aliquota_credito" />
+                    </group>
+                    <field name="apply_tax_ids" />
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

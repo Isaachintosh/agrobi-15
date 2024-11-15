@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Odoo Backend",
+            "type": "debugpy",
+            "request": "launch",
+            // "python": "${workspaceFolder}/odoocast/16.0/.venv/bin/python3",
+            "program": "${workspaceFolder}/odoo/odoo-bin",
+            "args": [
+                "-c","odoo-dev.conf",
+                "--dev","xml",
+                // "-u","all",
+                // "-d","erp-demo",
+                // "-i","project,crm,project,custom_crm_project"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            // "internalConsoleOptions": "openOnSessionStart",
+            "url": "http://localhost:8069/web?debug=assets",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "*": "${workspaceFolder}/*"
+            }
+        }
+    ]
+}

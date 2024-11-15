@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Sobrescreve a visão de criação rápida de oportunidade -->
+    <record id="quick_create_opportunity_form_custom" model="ir.ui.view">
+        <field name="name">crm.lead.form.quick_create.custom</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+        <field name="arch" type="xml">
+            <!-- Adiciona o campo x_create_timestamp no formulário -->
+            <form>
+                <group>
+                    <field name="partner_id" widget="res_partner_many2one"
+                        string='Organization / Contact'
+                        context="{
+                        'res_partner_search_mode': type == 'opportunity' and 'customer' or False,
+                        'default_name': contact_name or partner_name,
+                        'default_is_company': type == 'opportunity' and contact_name == False,
+                        'default_company_name': type == 'opportunity' and partner_name,
+                        'default_phone': phone,
+                        'default_email': email_from,
+                        'default_user_id': user_id,
+                        'default_team_id': team_id,
+                        'show_vat': True}"/>
+                    <field name="name" placeholder="e.g. Product Pricing" />
+                    <field name="email_from" string="Email" />
+                    <field name="phone" string="Phone" />
+                    <label for="expected_revenue"/>
+                    <div class="o_row">
+                        <field name="expected_revenue" class="oe_inline mr-5" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        <field name="priority" class="oe_inline" nolabel="1" widget="priority"/>
+                    </div>
+                    <div class="o_row">
+                        <field name="recurring_revenue" class="oe_inline pr-4" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        <field name="recurring_plan" class="oe_inline" placeholder="E.g. Monthly"
+                               attrs="{'required': [('recurring_revenue', '!=', 0)]}" options="{'no_create': True, 'no_open': True}"/>
+                    </div>
+                    <!-- Campo para armazenar a data e hora da criação -->
+                    <field name="x_create_timestamp" string="Data e Hora da Criação" readonly="1"/>
+
+                    <!-- Campos invisíveis -->
+                    <field name="company_currency" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="user_company_ids" invisible="1"/>
+                    <field name="team_id" invisible="1"/>
+                    <field name="type" invisible="1"/>
+                    <field name="partner_name" invisible="1"/>
+                    <field name="contact_name" invisible="1"/>
+                    <field name="country_id" invisible="1"/>
+                    <field name="state_id" invisible="1"/>
+                    <field name="city" invisible="1"/>
+                    <field name="street" invisible="1"/>
+                    <field name="street2" invisible="1"/>
+                    <field name="zip" invisible="1"/>
+                    <field name="mobile" invisible="1"/>
+                    <field name="website" invisible="1"/>
+                    <field name="function" invisible="1"/>
+                    <field name="title" invisible="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Sobrescreve a visão Kanban para adicionar a data e hora da criação -->
+    <record id="crm_lead_kanban_view_custom" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.view.custom</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <!-- Exibe o campo x_create_timestamp no Kanban como um campo normal -->
+            <xpath expr="//div[@class='o_kanban_record_title oe_kanban_details']" position="after">
+                <field name="x_create_timestamp"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,22 @@
+*.pyc
+*~
+.directory
+.project
+.pydevproject
+.settings/*
+
+# build artifacts from python setup.py build or python setup.py install
+build/
+dist/
+*egg*/
+docs/_build
+.vscode/tags
+.cache
+.pytest_cache
+.vscode/
+*.pfx
+sent_xml.xml
+received_xml.xml
+nfse-exemplo.py
+.vim/*
+.venv/*

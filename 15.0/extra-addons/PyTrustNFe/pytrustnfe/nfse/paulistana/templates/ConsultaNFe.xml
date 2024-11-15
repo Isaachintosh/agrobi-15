@@ -1,0 +1,21 @@
+<PedidoConsultaNFe xmlns="http://www.prefeitura.sp.gov.br/nfe">
+    <Cabecalho Versao="1" xmlns="">
+        <CPFCNPJRemetente><CNPJ>{{ consulta.cnpj_remetente }}</CNPJ></CPFCNPJRemetente>
+	</Cabecalho>
+    <Detalhe xmlns="">
+        {% if consulta.numero_rps -%}
+           <ChaveRPS>
+               <InscricaoPrestador>{{ consulta.inscricao_municipal }}</InscricaoPrestador>
+               <SerieRPS>{{ consulta.serie_rps }}</SerieRPS>
+               <NumeroRPS>{{ consulta.numero_rps }}</NumeroRPS>
+           </ChaveRPS>
+        {% endif %}
+        {% if consulta.numero_nfse -%}
+           <ChaveNFe>
+               <InscricaoPrestador>{{ consulta.inscricao_municipal }}</InscricaoPrestador>
+               <NumeroNFe>{{ consulta.numero_nfse }}</NumeroNFe>
+               <CodigoVerificacao>{{ consulta.codigo_verificacao }}</CodigoVerificacao>
+           </ChaveNFe>
+        {% endif %}
+    </Detalhe>
+</PedidoConsultaNFe>

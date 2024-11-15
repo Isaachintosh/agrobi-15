@@ -1,0 +1,17 @@
+<ConsultarNfsePorRps xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse">
+    <ConsultarNfseRpsEnvio>
+        <IdentificacaoRps xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <Numero>[nonNegativeInteger?]</Numero>
+            <Serie>[string?]</Serie>
+            <Tipo>[byte]</Tipo>
+        </IdentificacaoRps>
+        <Prestador xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <Cnpj>[string?]</Cnpj>
+            <InscricaoMunicipal>[string?]</InscricaoMunicipal>
+        </Prestador>
+    </ConsultarNfseRpsEnvio>
+    <pParam>
+        <P1 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">[string?]</P1>
+        <P2 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">[string?]</P2>
+    </pParam>
+</ConsultarNfsePorRps>
